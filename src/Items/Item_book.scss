@@ -1,0 +1,86 @@
+/* ItemBook.scss */
+
+.item-list {
+  float: left;
+  width: 65%;
+
+  h4 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .single-blog-post {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    h5 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+
+      .post-meta-left {
+        ul {
+          list-style: none;
+          padding: 0;
+
+          li {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #777;
+
+            i {
+              margin-right: 5px;
+              color: #333;
+            }
+
+            &.author {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+
+      .post-meta-right {
+        span {
+          i {
+            margin-right: 2px;
+            color: #ffcc00;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    
+      img {
+        width: 24%;
+        height: auto;
+        margin-top: 5px;
+        margin-bottom: 7px;
+      }
+    
+
+    p {
+      margin-top: -15%;
+    font-size: 16px;
+    color: #555;
+    margin-left: 25%;
+    }
+
+   
+  }
+}
