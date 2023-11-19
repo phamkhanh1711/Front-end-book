@@ -14,12 +14,18 @@ function Search() {
     try {
       const response = await axios.get(`http://localhost:8081/search?searchTerm=${searchTerm}`);
       console.log(response);
-
+      response.data.products.forEach((product, index) => {
+        console.log(`Product ${index + 1} - Book Title: ${product.book_title}`);
+      });
       // Update the state with search results
       setSearchResults(response.data.products);
 
       // Show the search results
       setShowResults(true);
+
+    
+     
+      
     } catch (error) {
       console.error("Error fetching data:", error);
     }

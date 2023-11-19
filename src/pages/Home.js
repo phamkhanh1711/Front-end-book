@@ -6,6 +6,7 @@ import Onepiece from '../image/sachonepiece.jpg'
 import truyentranh from '../image/onepiece.jpg'
 import thanhxuan from '../image/thanhxuan.jpg'
 import thanhxuan_1 from '../image/thanhxuan_1.jpg'
+import blog from '../image/discover_blog.jpg'
 import { useEffect } from "react";
 import { useState } from "react";
 function Home(props)
@@ -48,14 +49,16 @@ function Home(props)
    
     <div className="col-sm-9 padding-right">
 <div className="features_items">
-  <h2 className="title text-center">Features Items</h2>
+
   <section id="home" className="full-height">
-        <div>
+        <div className="img1">
+          <img src={blog}/>
+          </div>
+          <div  className="title">      
           <h1 className="left-to-right show-on-scroll">Nodemy</h1>
           <p className="left-to-right show-on-scroll">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-            recusandae sed illo sit, saepe laboriosam ea fugit, architecto quis
-            quia
+          Writing became such a process of discovery
+Sharon O'Brien
           </p>
         </div>
       </section>
@@ -65,10 +68,60 @@ function Home(props)
 <div className="Ngan_cach">
 
 </div>
-
 <div className="co_1">
+ 
+  <section id="home_2" className="full-height_2">
+
+  <div  className="title_2">      
+          <h1 className="left-to-right show-on-scroll">Nodemy</h1>
+          <p className="left-to-right show-on-scroll">
+          Writing became such a process of discovery
+Sharon O'Brien
+          </p>
+        </div>
+        <div className="img2">
+          <img src={blog}/>
+          </div>
+        
+      </section>
+</div>
+
+<div id="team" className="full-height">
+   
+
+        <div className="person show-on-scroll zoom">
+          <h3>Person 1</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
+            
+          </p>
+          <img className="img7" src={Onepiece}/>
+        </div>
+        <div className="person show-on-scroll zoom">
+          <h3>Person 2</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
+            repudiandae sequi, ad cum aperiam odit eius earum molestiae voluptatem
+          </p>
+          <img className="img7" src={biathethao}/>
+        </div>
+        <div className="person show-on-scroll zoom">
+        <h3>Person 3</h3>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
+            
+          </p>
+          <img  className="img7"src={Onepiece}/>
+         
+        
+        </div>
+        <div>
+    <h2>Sách Nổi Bật</h2>
+    </div>
+      </div>
+      <div className="co_1">
   <div>
-    <h3>SÁCH, TRUYỆN MỚI CẬP NHẬT</h3>
+    <h3>Benefit Read Book</h3>
   </div>
   <section id="about" className="full-height">
         <div className="box show-on-scroll left-to-right">
@@ -91,32 +144,6 @@ function Home(props)
         </div>
       </section>
 </div>
-<div id="team" className="full-height">
-        <div className="person show-on-scroll zoom">
-          {/* <h3>Person 1</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-            repudiandae sequi, ad cum aperiam odit eius earum molestiae voluptatem
-          </p> */}
-          <img className="img7" src={Onepiece}/>
-        </div>
-        <div className="person show-on-scroll zoom">
-          {/* <h3>Person 2</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-            repudiandae sequi, ad cum aperiam odit eius earum molestiae voluptatem
-          </p> */}
-          <img className="img7" src={Onepiece}/>
-        </div>
-        <div className="person show-on-scroll zoom">
-          <img  className="img7"src={Onepiece}/>
-          {/* <h3>Person 3</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-            repudiandae sequi, ad cum aperiam odit eius earum molestiae voluptatem
-          </p> */}
-        </div>
-      </div>
 </div> 
   );
   

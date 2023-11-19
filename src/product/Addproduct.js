@@ -1,7 +1,7 @@
 import axios from "axios";
 import CheckError from "../members/CheckError";
 import { useEffect, useState } from "react";
-
+import Cookies from 'js-cookie';
 function Addproduct()
 {   
   const [getData, setData] = useState([]);
@@ -154,7 +154,8 @@ function Addproduct()
       alert("Create product! Thất bại");
     } else {
       setErrors({});
-      let Token = JSON.parse(localStorage.getItem("Token"));
+      const Token = Cookies.get('Token');
+      console.log(Cookies.get('Token'));
       let url = "http://localhost:8081/add_book";
       console.log(url);
   

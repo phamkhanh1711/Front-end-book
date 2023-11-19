@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import CheckError from "./CheckError";
 import axios from "axios";
 import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 function Update() {
+  let navigate = useNavigate()
   const [errors, setErrors] = useState({});
   const [avatar, setAvatar] = useState("");
   const [getFile, setFile] = useState([]);
@@ -105,12 +107,14 @@ console.log(config);
 
      axios.post(url, formData, config)
             .then(response => {
-              console.log(response);     
+              console.log(response); 
+              alert("create  thông tin thanh cong");  
+              navigate('/profie')
             })
             .catch(error => {
               console.log(error);      
             });
-            alert("create  thông tin thanh cong"); 
+            
         }
   };
 

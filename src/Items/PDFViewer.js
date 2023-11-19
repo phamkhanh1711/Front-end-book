@@ -1,25 +1,97 @@
-import React, { useState } from 'react';
-import { Document, Page } from 'react-pdf';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+import { pageNavigationPlugin } from '@react-pdf-viewer/page-navigation';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import '@react-pdf-viewer/page-navigation/lib/styles/index.css';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function PDFViewer(props) {
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+function PDFViewer() {
+  const [viewPdf, setViewPDF] = useState(null);
+  const [showPdfViewer, setShowPdfViewer] = useState(false);
+  const [showAllPages, setShowAllPages] = useState(false);
+  const params = useParams();
+  const navigation = useNavigate();
 
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
+  useEffect(() => {
+    // Fetch PDF data from API using the id parameter
+    axios
+      .get(`http://localhost:8081/pdf-file/${params.id}`)
+      .then((res) => {
+        console.log('API Response:', res.data);
 
+        // Check if the expected property is present in the response
+        if (res.data && res.data.hasOwnProperty('File original')) {
+          const pdfUrl = `http://localhost:8081/${res.data['File original']}`;
+          console.log('PDF URL:', pdfUrl);
+
+          // Set the PDF file URL in the state
+          setViewPDF(pdfUrl);
+          setShowPdfViewer(true);
+        }
+        if (res.data && res.data.hasOwnProperty('File only 5 page')) {
+          const pdf = `http://localhost:8081/${res.data['File only 5 page']}`;
+          console.log('PDF URL:', pdf);
+
+          // Set the PDF file URL in the state
+          setViewPDF(pdf);
+          setShowPdfViewer(true);
+        } else {
+          console.error('Invalid file_path in API response:', res.data);
+        }
+      })
+      .catch(function (error) {
+        console.error('Error fetching PDF data:', error);
+      });
+  }, [params.id]);
+
+  // Create a new plugin instance for page navigation
+  const pageNavigationPluginInstance = pageNavigationPlugin();
+
+  // Create a new layout plugin instance
+  const layoutPlugin = defaultLayoutPlugin({
+    pageNavigation: {
+      pageIndex: pageNavigationPluginInstance.pageIndex,
+      pages: pageNavigationPluginInstance.pages,
+      totalPages: pageNavigationPluginInstance.totalPages,
+    },
+  });
+
+  // Function to handle the click event to toggle between showing 5 pages and all pages
+  const toggleShowAllPages = () => {
+    // Show a confirmation dialog
+    const userConfirmed = window.confirm('Do you want to make a payment to access all pages?');
+    console.log(userConfirmed);
+  
+    // If the user clicks "OK" in the confirmation dialog, navigate to the cart
+    if (userConfirmed) {
+      navigation('/cart');
+    }
+  
+    // Toggle the showAllPages state
+    setShowAllPages(!showAllPages);
+  };
   return (
-    <div>
-      <Document
-        file={props.pdfFile} // Đặt đường dẫn tới tài liệu PDF ở đây
-        onLoadSuccess={onDocumentLoadSuccess}
-      >
-        <Page pageNumber={pageNumber} />
-      </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
+    <div className='container'>
+      <h2>View PDF</h2>
+      {showPdfViewer && (
+        <div className='pdf-container'>
+          <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
+            <Viewer
+              fileUrl={viewPdf}
+              plugins={[layoutPlugin, pageNavigationPluginInstance]}
+              defaultScale={showAllPages ? 1 : 0.5} // Adjust the default scale based on the condition
+            />
+          </Worker>
+          <div className='button-container'>
+            <button style={{ color: "green" }}className='payment-button' onClick={toggleShowAllPages}>
+              {showAllPages ? 'Show First 5 Pages' : 'Show All Pages'}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

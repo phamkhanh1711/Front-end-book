@@ -25,25 +25,39 @@ import Addproduct from './product/Addproduct';
 
 
 import PDFViewer from './Items/PDFViewer';
-import Detective from './Items/Detective';
-import Detective_detail from './Items/Detective_detail';
-import Sport from './Items/Sport';
-import Kid from './Items/Kid';
-import Sport_detail from './Items/Sport_detail';
 
-import Kid_detail from './Items/Kid_detail';
+import Sport from './Items/Sách_Thể_Thao/Sport';
+import Kid from './Items/Sách_Cho_Bé/Kid';
+import Sport_detail from './Items/Sách_Thể_Thao/Sport_detail';
+
+import Kid_detail from './Items/Sách_Cho_Bé/Kid_detail';
 import Cart from './product/Cart';
 import Checkout from './product/Checkout';
-import History from './Items/History';
-import History_detail from './Items/History_detail';
+
+
 import Search from './pages/Search';
 import Profie_account from './members/Profie_account';
-import AdminDashboard from './members/AdminDashboard';
+import AdminDashboard from './Admin/AdminDashboard';
+import Comments from './Items/Sách_Trinh_Thám/Comments';
+import Detective from './Items/Sách_Trinh_Thám/Detective';
+import Detective_detail from './Items/Sách_Trinh_Thám/Detective_detail';
+import Comment_Sport from './Items/Sách_Thể_Thao/Comment_Sport';
+import Comments_Kid from './Items/Sách_Cho_Bé/Comments_Kid';
+import ListComment_TT from './Items/Sách_Trinh_Thám/ListComment_TT';
+import History from './Items/Sách_lịch_Sử/History';
+import History_detail from './Items/Sách_lịch_Sử/History_detail';
+import Comments_Ls from './Items/Sách_lịch_Sử/Comments_Ls';
+import ListComment_Ls from './Items/Sách_lịch_Sử/ListComment_Ls';
+
+import ListComment_Sp from './Items/Sách_Thể_Thao/ListComment_SP';
+
+
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  
     <Router>
         <App>
             <Routes>
@@ -61,7 +75,7 @@ root.render(
                <Route index path='/detective/detail/:id' element={<Detective_detail/>}/>
                <Route index path='/sport/detail/:id' element={<Sport_detail/>}/>
                <Route index path='/sport' element={<Sport/>}/>
-               <Route index path='/pdf' element={<PDFViewer/>}/>
+               <Route index path='/pdf/:id' element={<PDFViewer/>}/>
                <Route index path='/kid' element={<Kid/>}/>
                <Route index path='/kid/detail/:id' element={<Kid_detail/>}/>
                <Route index path='/cart' element={<Cart/>}/>
@@ -71,10 +85,17 @@ root.render(
                <Route index path='/search' element={<Search/>}/>
                <Route index path='/profie' element={<Profie_account/>}/>
                <Route index path='/dashboard' element={<AdminDashboard/>}/>
+               <Route index path='/comments/:id' element={<Comments/>}/>
+               <Route index path='/comments_sp/:id' element={<Comment_Sport/>}/>
+               <Route index path='/comments_kid/:id' element={<Comments_Kid/>}/>
+               <Route index path='/comments_ls/:id' element={<Comments_Ls/>}/>
+               <Route index path='/listcommenttt' element={<ListComment_TT/>}/>
+               <Route index path='/listcommentls' element={<ListComment_Ls/>}/>
+               <Route index path='/listcommentsp' element={<ListComment_Sp/>}/>
             </Routes>
         </App>
     </Router>
-  </React.StrictMode>
+  
 );
 
 // If you want to start measuring performance in your app, pass a function

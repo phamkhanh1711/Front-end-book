@@ -18,9 +18,45 @@ function Profie_account() {
     axios.get("http://localhost:8081/member/detail", config)
       .then((response) => {
         console.log(response);
-        setUserData(response.data.detail[0]); // Assuming the user details are in the 'detail' property
+        setUserData(response.data.detail[0] || {});
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
       });
   }, []);
+
+  const handleDelete = () => {
+    // Assuming Token is a valid JWT string
+    const Token = Cookies.get('Token');
+
+    // Make sure the Token is a valid string
+    if (!Token || typeof Token !== 'string') {
+      console.error('Invalid or missing token');
+      return;
+    }
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json',
+      },
+    };
+
+    const Durl = "http://localhost:8081/member/delete";
+
+    axios
+      .delete(Durl, config)
+      .then((res) => {
+        console.log(res);
+        // Update the local state to reflect the deleted user information
+        setUserData({});
+        // Optionally, you might want to redirect the user to a different page or perform other actions after deletion.
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="card">
@@ -37,6 +73,9 @@ function Profie_account() {
         <a target="_blank" href="#"><i className="fa fa-google-plus" /></a>
       </div>
       <button>Contact me</button>
+      <div className="delete">
+        <button style={{ color: "red" }} onClick={handleDelete}>Delete Account</button>
+      </div>
     </div>
   );
 }

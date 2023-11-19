@@ -2,8 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import { useContext } from 'react';
+import { UserContext } from '../../UserContext';
+
 
 function Detective(props) {
+  // Use the useContext hook to access the value provided by UserContext
+  const user = useContext(UserContext)
+ console.log(user);
   const [dataFromApi, setApiData] = useState([]);
   const [page, setPage] = useState(0);
   const pageSize = 9;
@@ -25,11 +31,15 @@ function Detective(props) {
     setPage(selectedPage);
   }
 
+  function addtocart(e)
+  {
+
+  }
   const renderData = () => {
     if (dataFromApi.length === 0) {
       return <p>Loading...</p>;
     }
-
+  
     return dataFromApi.map((item) => (
       <div className="col-sm-4" key={item.book_id}>
         <div className="product-image-wrapper">
@@ -38,18 +48,16 @@ function Detective(props) {
               <img src={`http://localhost:8081/public/upload/${item.image_path}`} alt={item.book_title} />
               <h2>{item.price}.VND</h2>
               <p>{item.book_title}</p>
-              <a href="#" className="btn btn-default add-to-cart">
-                <i className="fa fa-shopping-cart" />
-                Add to cart
+              <a href="#" onClick={addtocart} id={item.book_id} className="btn btn-default add-to-cart">
+                <i className="fa fa-shopping-cart" />Add to cart
               </a>
             </div>
             <div className="product-overlay">
               <div className="overlay-content">
                 <h2>{item.price}.VND</h2>
                 <p>{item.book_title}</p>
-                <a href="#" className="btn btn-default add-to-cart">
-                  <i className="fa fa-shopping-cart" />
-                  Add to cart
+                <a href="#" onClick={addtocart} id={item.book_id} className="btn btn-default add-to-cart">
+                  <i className="fa fa-shopping-cart" />Add to cart
                 </a>
               </div>
             </div>
@@ -75,6 +83,7 @@ function Detective(props) {
       </div>
     ));
   };
+  
 
   return (
     <div className="col-sm-9 padding-right">

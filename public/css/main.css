@@ -9,14 +9,14 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap);
 
 body {
-    
+    background-color: red;
     font-family: 'Roboto', sans-serif;
     position: relative;
     font-weight: 400px;
     display: flex;
   justify-content: center;
   align-items: center;
-}
+} 
 
 ul li {
     list-style: none;
@@ -965,21 +965,26 @@ h2.title:before {
 }
 
 .features_items {
+    margin-top: 2%;
     overflow: hidden;
 }
 
 h2.title {
+    width: 19%;
     color: #FE980F;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-weight: 700;
-    margin: 0 15px;
+    /* margin: 0 15px; */
     text-transform: uppercase;
     margin-bottom: 30px;
     position: relative;
+    margin-left: 40%;
 }
 
 .product-image-wrapper {
+
+    width: 78%;
     border: 1px solid #F7F7F5;
     overflow: hidden;
     margin-bottom: 30px;
@@ -1019,7 +1024,7 @@ h2.title {
 }
 
 .productinfo img {
-    width: 100%;
+    width: 70%;
     height: 215px;
 }
 
@@ -1374,9 +1379,10 @@ h2.title {
 }
 
 .product-information p {
-    color: #696763;
+  color: #696763;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: 5px;
+    margin-bottom: 9px;
+    font-size: 16px;
 }
 
 .product-information span {
@@ -1516,6 +1522,7 @@ h2.title {
     color: #FFFFFF;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
+    margin-top: 0%;
 }
 
 
@@ -2705,12 +2712,29 @@ textarea {
     background-color: #08609a;
   }
    /* CSS */
+   /* .form-add-book {
+    width: 230%;
+ 
+  padding: 40px 30px;
+  border-radius: 0 50px;
+  box-shadow: -4px -4px 8px var(--light), 3px 3px 6px var(--dark-heavy);
+  } */
+  .form-add-book button{
+    background: #FE980F;
+    border: medium none;
+    border-radius: 0;
+    color: #FFFFFF;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    padding: 6px 25px;
+  }
+ 
 .login-form {
     width: 350px;
  
   padding: 40px 30px;
   border-radius: 0 50px;
-  /* box-shadow: -4px -4px 8px var(--light), 3px 3px 6px var(--dark-heavy); */
+  box-shadow: -4px -4px 8px var(--light), 3px 3px 6px var(--dark-heavy);
   }
   .login-form .text {
     font-size: 32px;
@@ -2830,15 +2854,16 @@ textarea {
 .co_1 {
     width: 100%;
     border-bottom: 1px solid #f5f5f5;
-    margin: 0 auto;
+    /* margin: 30px auto; */
     padding-bottom: 20px;
     padding-top: 20px;
+    margin-top: -15%;
   }
   
   .co_1 h3 {
     text-align: center;
     color: #330000;
-    font-size: 20px;
+    font-size: 30px;
     margin-top: 10px;
     font-weight: bold;
     padding-top: 5px;
@@ -2922,9 +2947,13 @@ textarea {
   }
   
   
-  .Ngan_cach{
-    border-bottom: 1px solid rgb(130, 123, 123); margin-left: 0; margin-right: 0; padding-bottom: 20px; padding-top: 20px;
-  }
+  /* .Ngan_cach{
+    border-bottom: 1px solid rgb(130, 123, 123);
+     margin-left: 0;
+      margin-right: 0; 
+      padding-bottom: 20px; padding-top: 20px;
+      margin-top: -20%;
+  } */
 .panel-group.category-products {
   margin-top: 20px;
 }
@@ -3091,6 +3120,7 @@ body {
 
 .full-height {
 	height: 100vh;
+    background: url(/src/image/bg.jpg);
 }
 
 .left-to-right {
@@ -3121,24 +3151,91 @@ body {
 }
 
 #home {
-	background-image: linear-gradient(to right, #4daf54, #3d8880);
-	color: white;
-	display: flex;
-	align-items: center;
-	padding-left: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.img1 {
+    flex: 1; /* Ảnh chiếm toàn bộ không gian còn lại */
+    margin-right: 20px; /* Khoảng cách giữa ảnh và phần còn lại */
+}
+
+.img1 img {
+    width: 100%; /* Đảm bảo ảnh chiếm toàn bộ không gian của .img1 */
+    border-radius: 10px; /* Tuỳ chỉnh đường viền cong cho ảnh */
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#home h1, #home p {
+    margin: 0; /* Loại bỏ margin mặc định của h1 và p */
 }
 
 #home h1 {
-	font-size: 50px;
-	margin-bottom: 20px;
+    font-size: 30px;
+    margin-bottom: 10px; /* Khoảng cách giữa h1 và p */
 }
 
 #home p {
-    color: white;
-	font-size: 20px;
-	width: 700px;
-	transition-delay: 0.2s;
+   
+    color: black;
+    font-size: 10px;
+    max-width: 400px; /* Đặt chiều rộng tối đa cho p */
+    transition-delay: 0.2s;
+    padding: 0 45px;
+    padding-bottom: 13px;
+    font-size: 15px;
+    font-style: italic;
+    font-family: "Georgia","Times New Roman",serif;
 }
+
+#home_2 {
+    display: flex;
+    align-items: center;
+}
+
+.img2 {
+    flex: 1;
+    margin-right: 20px; /* Thay đổi margin-right để giữ khoảng cách giữa ảnh và phần còn lại */
+}
+
+.img2 img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.title_2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Thay đổi từ flex-end sang flex-start */
+}
+
+#home_2 h1, #home_2 p {
+    margin: 0; 
+}
+
+#home_2 h1 {
+    font-size: 30px;
+    margin-bottom: 10px; /* Khoảng cách giữa h1 và p */
+}
+
+#home_2 p {
+    color: black;
+    font-size: 10px;
+    max-width: 400px; /* Đặt chiều rộng tối đa cho p */
+    transition-delay: 0.2s;
+    padding: 0 45px;
+    padding-bottom: 13px;
+    font-size: 15px;
+    font-style: italic;
+    font-family: "Georgia","Times New Roman",serif;
+}
+
+
 
 #about {
     margin-top: -25%;
@@ -3159,13 +3256,23 @@ body {
 .box h2 {
 	margin-bottom: 15px;
 }
+#team > div h2 {
+    font-size: 40px;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-style: italic;
+    font-family: "Georgia","Times New Roman",serif;
+}
 
 #team {
-	background: linear-gradient(180deg, #017c2c 50%, #fff 50%);
+	
 	display: flex;
 	align-items: center;
 	justify-content: center;
-    margin-top: -20%;
+    margin-top: -15%;
 }
 
 #team .person {
@@ -3222,13 +3329,15 @@ body {
     object-position: center;
   }
   
-  h2 {
+ .card h2 {
     color: white;
     margin-top: 40px;
   }
   
-  p {
-    color: var(--pink-color);
+ .card p {
+    font-size: 20px;
+    color: white;
+    
   }
   
   .card__social a {
@@ -3259,4 +3368,8 @@ body {
   button:hover {
     background-color: var(--pink-color);
   }
-  
+  .delete{
+    
+        margin-top: -16%;
+    
+  }
