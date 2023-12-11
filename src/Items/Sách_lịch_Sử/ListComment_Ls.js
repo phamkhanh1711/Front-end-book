@@ -1,6 +1,6 @@
 function ListComment_Ls(props) {
     const { comments } = props;
-  
+    console.log(comments);
   
     function renderList() {
       if (!comments || comments.length === 0) {

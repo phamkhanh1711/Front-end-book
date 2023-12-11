@@ -18,9 +18,13 @@ function App(props) {
   function renderMenu() {
     if (location.pathname.includes("account") || location.pathname.includes("profie")) {
       return <MenuAcc />;
-    } else if (location.pathname.includes("cart") || location.pathname.includes("checkout")) {
+    } else if (location.pathname.includes("payment") || location.pathname.includes("checkout")) {
       // Render Cart related content here
-    } else if (location.pathname.includes("register")) {
+    }
+   else if (location.pathname.includes("cart") ){
+    // Render Cart related content here
+  } 
+    else if (location.pathname.includes("register")) {
       // Render Register related content here
     } else if (location.pathname.includes("login")) {
       // Render Login related content here

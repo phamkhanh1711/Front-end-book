@@ -49,7 +49,7 @@ function logout()
       </li>       
       <li><Link to="/account"><i className="fa fa-user" /> Account</Link></li>
       
-      <li><a href="#"><i className="fa fa-star" /> Wishlist</a></li>
+      <li><Link to="/wishlist"><i className="fa fa-user" /> Wishlist</Link></li>
       <li className="dropdown">
                     <a href="#">Book<i className="fa fa-angle-down" /></a>
                     <ul role="menu" className="sub-menu">

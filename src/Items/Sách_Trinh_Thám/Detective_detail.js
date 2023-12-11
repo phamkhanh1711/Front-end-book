@@ -87,10 +87,14 @@ function Detective_detail(props)
             <span>{getData.quantity}</span>
             <label>Quantity:</label>
             <input type="text" defaultValue={1} />
-            <button type="button" className="btn btn-fefault cart">
-              <i className="fa fa-shopping-cart" />
-              Add to cart
-            </button>
+            <Link
+        to={`/cart/${getData.book_id}`}  // Pass book_id as a parameter
+        type="button"
+        className="btn btn-fefault cart"
+      >
+        <i className="fa fa-shopping-cart" />
+        Add to cart
+      </Link>
           </span>
             
           <p><b>Brand:</b> {getData.supplier_name}</p>

@@ -94,7 +94,8 @@ function Kid_detail(props)
             <p><b>Category:</b> {getData.category_name}</p>
             <p><b>Publication Year:</b> {getData.publication_year}</p>
             <p><b>Price:</b> {getData.price}.VND</p>
-            <Link  to={`/pdf/${getData.book_id}`}  style={{ color: "skyblue", fontSize: "20px" }} >Read PDF</Link>
+            <Link to={`/pdf/${getData.book_id}?audioPath=${getData.audio_path}`} style={{ color: "skyblue", fontSize: "20px" }}>Read PDF</Link>
+
             <AudioPlayer
   src={`http://localhost:8081/public/upload/${getData.audio_path}`}
   autoPlayAfterSrcChange={false}

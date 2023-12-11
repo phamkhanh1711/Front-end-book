@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 function Sport(props) {
   const [dataFromApi, setApiData] = useState([]);
   const categoryId = props.categoryId;
+  console.log(categoryId);
   useEffect(() => {
     axios.get(`http://localhost:8081/category/2`)
       .then((response) => {

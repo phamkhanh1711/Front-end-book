@@ -31,7 +31,7 @@ import Kid from './Items/Sách_Cho_Bé/Kid';
 import Sport_detail from './Items/Sách_Thể_Thao/Sport_detail';
 
 import Kid_detail from './Items/Sách_Cho_Bé/Kid_detail';
-import Cart from './product/Cart';
+
 import Checkout from './product/Checkout';
 
 
@@ -50,6 +50,12 @@ import Comments_Ls from './Items/Sách_lịch_Sử/Comments_Ls';
 import ListComment_Ls from './Items/Sách_lịch_Sử/ListComment_Ls';
 
 import ListComment_Sp from './Items/Sách_Thể_Thao/ListComment_SP';
+
+import Wishlist from './Items/Wishlist';
+import Payment from './product/Payment';
+import Cart from './product/Cart';
+
+
 
 
 
@@ -78,13 +84,14 @@ root.render(
                <Route index path='/pdf/:id' element={<PDFViewer/>}/>
                <Route index path='/kid' element={<Kid/>}/>
                <Route index path='/kid/detail/:id' element={<Kid_detail/>}/>
-               <Route index path='/cart' element={<Cart/>}/>
+               <Route index path='/payment' element={<Payment/>}/>
                <Route index path='/checkout' element={<Checkout/>}/>
                <Route index path='/history' element={<History/>}/>
                <Route index path='/history/detail/:id' element={<History_detail/>}/>
                <Route index path='/search' element={<Search/>}/>
                <Route index path='/profie' element={<Profie_account/>}/>
                <Route index path='/dashboard' element={<AdminDashboard/>}/>
+              
                <Route index path='/comments/:id' element={<Comments/>}/>
                <Route index path='/comments_sp/:id' element={<Comment_Sport/>}/>
                <Route index path='/comments_kid/:id' element={<Comments_Kid/>}/>
@@ -92,6 +99,8 @@ root.render(
                <Route index path='/listcommenttt' element={<ListComment_TT/>}/>
                <Route index path='/listcommentls' element={<ListComment_Ls/>}/>
                <Route index path='/listcommentsp' element={<ListComment_Sp/>}/>
+               <Route index path='/wishlist' element={<Wishlist/>}/>
+               <Route index path='/cart/:id' element={<Cart/>}/>               
             </Routes>
         </App>
     </Router>
