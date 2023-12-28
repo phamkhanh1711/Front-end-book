@@ -7,7 +7,7 @@ function Login() {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
-    role_id: "",
+    // role_id: "",
   });
   const navigate = useNavigate();
   const [errors, setErrors] = useState([]);
@@ -34,10 +34,10 @@ function Login() {
       errorsSubmit.password = "Vui long nhap password";
       flag = false;
     }
-    if (inputs.role_id === "" || inputs.role_id === undefined) {
-      errorsSubmit.role_id = "Vui Lòng Nhập role_id";
-      flag = false;
-    }
+    // if (inputs.role_id === "" || inputs.role_id === undefined) {
+    //   errorsSubmit.role_id = "Vui Lòng Nhập role_id";
+    //   flag = false;
+    // }
 
     if (!flag) {
       setErrors(errorsSubmit);
@@ -47,7 +47,7 @@ function Login() {
       const data = {
         email: inputs.email,
         password: inputs.password,
-        role_id: inputs.role_id,
+        // role_id: inputs.role_id,
       };
       axios
         .post("http://localhost:8081/login", data)
@@ -64,22 +64,16 @@ function Login() {
           const Auth = res.data.User;
           console.log(Auth);
           Cookies.set('Auth', JSON.stringify(Auth));
-
+          
 
           // Cookies.setItem('Auth', JSON.stringify(Auth));
           
           alert("Login thanh cong");
-
+          navigate("/")
           // Sau khi đăng nhập thành công, điều hướng đến trang tương ứng
-          if (inputs.role_id === "1") {
-            // Nếu là Admin
-            navigate("/dashboard");
-          } else if (inputs.role_id === "2") {
-            // Nếu là User
-            navigate("/");
-          }
+          
         })
-        .catch((error) => {
+        .catch((error) => { 
           console.log(error);
         });
     }
@@ -94,18 +88,18 @@ function Login() {
     }
   }
 
-  const arr = [
-    { id: 1, name: "Admin" },
-    { id: 2, name: "Member" },
-  ];
+  // const arr = [
+  //   { id: 1, name: "Admin" },
+  //   { id: 2, name: "Member" },
+  // ];
 
-  function renderSelect() {
-    return arr.map((item) => (
-      <option key={item.id} value={item.id}>
-        {item.name}
-      </option>
-    ));
-  }
+  // function renderSelect() {
+  //   return arr.map((item) => (
+  //     <option key={item.id} value={item.id}>
+  //       {item.name}
+  //     </option>
+  //   ));
+  // }
 
   return (
     <div class="col-sm-4 col-sm-offset-1">
@@ -124,9 +118,9 @@ function Login() {
             name="password"
             onChange={handleInput}
           />
-          <select name="role_id" onChange={handleInput}>
+          {/* <select name="role_id" onChange={handleInput}>
             {renderSelect()}
-          </select>
+          </select> */}
           <span>
             <input type="checkbox" class="checkbox" />
             Keep me signed in

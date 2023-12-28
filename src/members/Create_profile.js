@@ -3,7 +3,7 @@ import CheckError from "./CheckError";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
-function Update() {
+function Create_profile() {
   let navigate = useNavigate()
   const [errors, setErrors] = useState({});
   const [avatar, setAvatar] = useState("");
@@ -42,15 +42,29 @@ function Update() {
     if (user.fullName === "") {
       errorsSubmit.fullName = "Vui lòng nhập họ và tên";
       flag = false;
-    }
+    } 
+    if (user.address === "") {
+      errorsSubmit.address = "Vui lòng nhập Địa chỉ";
+      flag = false;
+    } 
+    
     if (user.phone_number === "") {
       errorsSubmit.phone_number = "Vui lòng nhập số điện thoại";
       flag = false;
+    } else if (!/^\d{10,11}$/.test(user.phone_number)) {
+      errorsSubmit.phone_number = "Vui lòng nhập số điện thoại từ 10 đến 11 chữ số";
+      flag = false;
     }
+    
     if (user.birth_date === "") {
       errorsSubmit.birth_date = "Vui lòng nhập birthday";
       flag = false;
+    } else if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(user.birth_date)) {
+      errorsSubmit.birth_date = "Vui lòng nhập ngày sinh theo định dạng DD/MM/YYYY";
+      flag = false;
     }
+    
+    
     if (user.gender === "") {
       errorsSubmit.gender = "Vui lòng nhập Giới Tính";
       flag = false;
@@ -160,7 +174,7 @@ console.log(config);
           />
           <input type="file" name="avatar" onChange={handleFile} />
           <button type="submit" className="btn btn-default">
-            Update
+            Create_profile
           </button>
         </form>
         <CheckError errors={errors} />
@@ -169,4 +183,4 @@ console.log(config);
   );
 }
 
-export default Update;
+export default Create_profile;

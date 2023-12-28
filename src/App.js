@@ -34,6 +34,10 @@ function App(props) {
     } else if (location.pathname.includes("pdf")) {
       // Hide Menu_Left on the PDFViewer page
       return null;
+    }
+    else if (location.pathname.includes("button_back")) {
+      // Hide Menu_Left on the PDFViewer page
+      return null;
     } else {
       return <Menu_Left />;
     }

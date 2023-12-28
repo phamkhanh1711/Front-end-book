@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import biathethao from '../image/biathethao.jpg'
-import biacaulong from '../image/biacaulong.jpg'
-import biatheduc from '../image/biatheduc.jpg'
+import biasach from '../image/biasach.jpg'
+
 import Onepiece from '../image/sachonepiece.jpg'
-import truyentranh from '../image/onepiece.jpg'
-import thanhxuan from '../image/thanhxuan.jpg'
-import thanhxuan_1 from '../image/thanhxuan_1.jpg'
-import blog from '../image/discover_blog.jpg'
+
+
+import book_white from '../image/book_white.png'
+import book_black from '../image/book_black.png'
 import { useEffect } from "react";
 import { useState } from "react";
 function Home(props)
@@ -52,13 +52,12 @@ function Home(props)
 
   <section id="home" className="full-height">
         <div className="img1">
-          <img src={blog}/>
+          <img src={book_black}/>
           </div>
           <div  className="title">      
-          <h1 className="left-to-right show-on-scroll">Nodemy</h1>
+          <h1 className="left-to-right show-on-scroll">Keep It Simple</h1>
           <p className="left-to-right show-on-scroll">
-          Writing became such a process of discovery
-Sharon O'Brien
+          Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
           </p>
         </div>
       </section>
@@ -73,14 +72,13 @@ Sharon O'Brien
   <section id="home_2" className="full-height_2">
 
   <div  className="title_2">      
-          <h1 className="left-to-right show-on-scroll">Nodemy</h1>
+  <h1 className="left-to-right show-on-scroll">Keep It Simple</h1>
           <p className="left-to-right show-on-scroll">
-          Writing became such a process of discovery
-Sharon O'Brien
+          Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
           </p>
         </div>
         <div className="img2">
-          <img src={blog}/>
+          <img src={book_white}/>
           </div>
         
       </section>
@@ -90,15 +88,16 @@ Sharon O'Brien
    
 
         <div className="person show-on-scroll zoom">
-          <h3>Person 1</h3>
+          <h3> Rosie Nguyễn</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
+          Mình nói gì khi nói về hạnh phúc?” là hành trình đi tìm hạnh phúc khác với khuôn mẫu xã hội, 
+          là cuộc tìm kiếm từ bên ngoài vào bên trong, từ chốn đông người tới chỗ không người, tìm từ người khác đến tìm trong chính mình
             
           </p>
-          <img className="img7" src={Onepiece}/>
+          <img className="img7" src={biasach}/>
         </div>
         <div className="person show-on-scroll zoom">
-          <h3>Person 2</h3>
+          <h3>Misaki</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. In
             repudiandae sequi, ad cum aperiam odit eius earum molestiae voluptatem
@@ -106,9 +105,10 @@ Sharon O'Brien
           <img className="img7" src={biathethao}/>
         </div>
         <div className="person show-on-scroll zoom">
-        <h3>Person 3</h3>
+        <h3>Oda Eiichiro</h3>
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
+        One Piece, từng được xuất bản tại Việt Nam dưới tên gọi Đảo Hải Tặc là bộ manga dành cho lứa tuổi thiếu niên của tác giả Oda Eiichiro, 
+       
             
           </p>
           <img  className="img7"src={Onepiece}/>
@@ -119,31 +119,7 @@ Sharon O'Brien
     <h2>Sách Nổi Bật</h2>
     </div>
       </div>
-      <div className="co_1">
-  <div>
-    <h3>Benefit Read Book</h3>
-  </div>
-  <section id="about" className="full-height">
-        <div className="box show-on-scroll left-to-right">
-          <h2>Title</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur,
-            eveniet sequi. Nobis, dolorum culpa doloribus adipisci ut ab iure non
-            voluptates vel exercitationem explicabo nam, sunt maxime error nemo
-            assumenda.
-          </p>
-        </div>
-        <div className="box show-on-scroll right-to-left">
-          <h2>Title</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur,
-            eveniet sequi. Nobis, dolorum culpa doloribus adipisci ut ab iure non
-            voluptates vel exercitationem explicabo nam, sunt maxime error nemo
-            assumenda.
-          </p>
-        </div>
-      </section>
-</div>
+     
 </div> 
   );
   
@@ -151,4 +127,3 @@ Sharon O'Brien
 }
 export default Home;
 
-{/* */}

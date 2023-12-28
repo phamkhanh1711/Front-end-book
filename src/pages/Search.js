@@ -22,9 +22,6 @@ function Search() {
 
       // Show the search results
       setShowResults(true);
-
-    
-     
       
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -34,7 +31,7 @@ function Search() {
   const handleResultClick = (productId) => {
     // Handle the click on a search result (e.g., navigate to product details page)
     console.log(`Clicked on result with ID ${productId}`);
-    // Add your navigation logic here
+    navigate(`/detective/detail/${productId}`);
   };
 
   return (

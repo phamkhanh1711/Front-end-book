@@ -2,22 +2,22 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-
+import Cookies from 'js-cookie';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 import ListComment_TT from "./ListComment_TT";
 import Comments from "./Comments";
 
-
-
-
 function Detective_detail(props)
 {
   let navigate = useNavigate()
   let params = useParams();
+  console.log(params);
+  const [showAllPages, setShowAllPages] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);  
   const [getData, setData] = useState({});
-  const [viewPdf, setViewPDF] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
   const [comments, setComments] = useState([]);
   useEffect(() => {
     // Fetch PDF data from API
@@ -25,7 +25,7 @@ function Detective_detail(props)
       .then(res => {
         console.log(res);
         setData(res.data.detail[0]);
-        console.log(res.data.comments); 
+       
         setComments(res.data.comments);
       
       })
@@ -33,8 +33,41 @@ function Detective_detail(props)
         console.log(error);
       });
   }, [params.id]);
+  const baseUrl = 'http://localhost:8081'; 
+  const url = `${baseUrl}/create_payment_url/${params.id}`;
 
+  const toggleShowAllPages = async () => {
+    const Token = Cookies.get('Token');  // Retrieve the token from cookies
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      withCredentials: true, // Add this line
+    };
+    try {
+      const res = await axios.post(url, {}, config);
+      console.log(res.data);
+      if (res.data.vnpUrl) {
+        window.location.href = res.data.vnpUrl;
+      }
+      
+
+      setTimeout(() => {
+        console.log('Payment process completed');
+        setIsLoading(false);
+        setSuccessMessage('');
+        console.log('Navigating back to PDF viewer page');
+        navigate(`/pdf/${params.id}`);
+        setShowAllPages(true);
+      }, 2000);
+    } catch (error) {
+
+      console.log(error);
+    }
+  };
     function fetchData()
     {
         return (
@@ -48,7 +81,7 @@ function Detective_detail(props)
               
             <div className="carousel-inner">
             <div className="item active">
-            <img src={`http://localhost:8081/public/upload/${getData.image_path}`} alt={getData.book_title} />
+            {<img src={`http://localhost:8081/public/upload/${getData.image_path}`} alt={getData.book_title} />}
               <img src="images/product-details/similar2.jpg" alt="" />
               <img src="images/product-details/similar3.jpg" alt="" />
             </div>
@@ -85,8 +118,8 @@ function Detective_detail(props)
            
           <span>
             <span>{getData.quantity}</span>
-            <label>Quantity:</label>
-            <input type="text" defaultValue={1} />
+        
+         
             <Link
         to={`/cart/${getData.book_id}`}  // Pass book_id as a parameter
         type="button"
@@ -95,6 +128,7 @@ function Detective_detail(props)
         <i className="fa fa-shopping-cart" />
         Add to cart
       </Link>
+       
           </span>
             
           <p><b>Brand:</b> {getData.supplier_name}</p>
@@ -102,11 +136,13 @@ function Detective_detail(props)
           <p><b>Category:</b> {getData.category_name}</p>
           <p><b>Publication Year:</b> {getData.publication_year}</p>
           <p><b>Price:</b> {getData.price} VND</p>
-          <Link  to={`/pdf/${getData.book_id}`}  style={{ color: "skyblue", fontSize: "20px" }} >Read PDF</Link>
-
-
-
+          <Link  to={`/pdf/${getData.book_id}`} className='btn btn-primary' style={{ color: "white", fontSize: "15px" }} >Read Book</Link>
+          <div className='button-container'>
+            <button style={{ color: 'white' }} className='btn btn-primary' onClick={toggleShowAllPages} >
            
+           Payment 
+            </button>
+          </div> 
           </div>
         </div>
         );

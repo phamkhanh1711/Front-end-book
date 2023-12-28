@@ -29,6 +29,7 @@ function Payment() {
     let errorsSubmit = {};
     let flag = true;
 
+    // Validation checks
     if (formData.orderDescription === '') {
       errorsSubmit.orderDescription = 'Vui lòng nhập mô tả đơn hàng';
       flag = false;
@@ -48,28 +49,33 @@ function Payment() {
       alert('Vui lòng kiểm tra lại thông tin');
     } else {
       setErrors({});
-      // setIsLoading(true); // Set loading state to true when initiating payment
+      setIsLoading(true);
 
-      // Gọi API để tạo URL thanh toán
+      // Simulate API call to create payment URL
       axios
-        .post('http://localhost:8081/create_payment_url', {
+        .post(`http://localhost:8081/create_payment_url/${params.id}` , {
           amount: formData.amount,
           orderDescription: formData.orderDescription,
           orderType: formData.orderType,
           language: formData.language,
         })
         .then((response) => {
-          // Xử lý thành công, có thể redirect người dùng đến URL thanh toán
           console.log('Payment URL:', response);
           window.open(response.data);
-          // setSuccessMessage('Đang chờ xác nhận thanh toán...');
+          setSuccessMessage('Đang chờ xác nhận thanh toán...');
 
-         
+          // Simulate payment process completion
+          setTimeout(() => {
+            setIsLoading(false);
+            setSuccessMessage('');
+
+            // Navigate back to the PDF viewer page
+            navigate(`/pdf/${params.id}`);
+          }, 2000);
         })
         .catch((error) => {
           console.error('Error creating payment URL:', error);
-          // setIsLoading(false); // Set loading state to false in case of an error
-          // Xử lý lỗi nếu có
+          setIsLoading(false);
         });
     }
   };
@@ -79,6 +85,7 @@ function Payment() {
       <div className="login-form">
         <h2>Điền Thông Tin Thanh Toán</h2>
         <form onSubmit={handleSubmit}>
+          {/* Order description input */}
           <label htmlFor="orderDescription">Mô tả đơn hàng:</label>
           <input
             type="text"
@@ -89,6 +96,7 @@ function Payment() {
           />
           {errors.orderDescription && <p className="error-message">{errors.orderDescription}</p>}
 
+          {/* Order type selection */}
           <label htmlFor="orderType">Loại đơn hàng:</label>
           <select name="orderType" value={formData.orderType} onChange={handleChange}>
             <option value="topup">Nạp tiền điện thoại</option>
@@ -96,12 +104,14 @@ function Payment() {
             <option value="fashion">Thời trang</option>
           </select>
 
+          {/* Language selection */}
           <label htmlFor="language">Ngôn ngữ:</label>
           <select name="language" value={formData.language} onChange={handleChange}>
             <option value="vn">Tiếng Việt</option>
             <option value="en">English</option>
           </select>
 
+          {/* Amount input */}
           <label htmlFor="amount">Số tiền:</label>
           <input
             type="number"
@@ -112,12 +122,16 @@ function Payment() {
           />
           {errors.amount && <p className="error-message">{errors.amount}</p>}
 
+          {/* Submit button */}
           <button type="submit" className="btn btn-default" disabled={isLoading}>
             {isLoading ? 'Đang xử lý...' : 'Thanh Toán VNPAY'}
           </button>
 
+          {/* Success message */}
           {successMessage && <p className="success-message">{successMessage}</p>}
         </form>
+
+        {/* Display validation errors */}
         <CheckError errors={errors} />
       </div>
     </div>

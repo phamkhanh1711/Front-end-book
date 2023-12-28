@@ -106,11 +106,25 @@ function Addproduct()
     if (user.bookTitle === "") {
       errorsSubmit.bookTitle = "Vui lòng nhập tiêu đề sách";
       flag = false;
-    }
-    if (user.price === "") {
-      errorsSubmit.price = "Vui lòng nhập giá sách";
+  } else if (!/^[a-zA-Z0-9]+$/.test(user.bookTitle)) {
+      errorsSubmit.bookTitle = "Chỉ được nhập chữ và số";
       flag = false;
-    }
+  }
+  
+  if (user.price === "") {
+    errorsSubmit.price = "Vui lòng nhập giá sách";
+    flag = false;
+} else if (!/^\d+$/.test(user.price)) {
+    errorsSubmit.price = "Vui lòng chỉ nhập số";
+    flag = false;
+} else if (parseInt(user.price, 10) < 0) {
+    errorsSubmit.price = "Giá sách không được âm";
+    flag = false;
+} else if (parseInt(user.price, 10) < 10000) {
+    errorsSubmit.price = "Giá sách không được dưới 10,000 VND";
+    flag = false;
+}
+
     if (!user.supplier) {
       errorsSubmit.supplier = "Vui lòng chọn nhà cung cấp";
       flag = false;
@@ -118,11 +132,16 @@ function Addproduct()
     if (user.author === "") {
       errorsSubmit.author = "Vui lòng chọn tác giả";
       flag = false;
-    }
-    if (user.publicationYear === "") {
-      errorsSubmit.publicationYear = "Vui lòng chọn năm xuất bản";
+  } else if (!/^[a-zA-Z]+$/.test(user.author)) {
+      errorsSubmit.author = "Vui lòng chỉ nhập chữ cái không có số và ký tự đặc biệt";
       flag = false;
-    }
+  }
+  
+  if (user.publicationYear === "") {
+    errorsSubmit.publicationYear = "Vui lòng chọn năm xuất bản";
+    flag = false;
+} 
+
   
     if (fileElem === null) {
       errorsSubmit.fileElem = "Vui lòng chọn ảnh cho File Elem";
@@ -240,7 +259,7 @@ function Addproduct()
           <input type="file" name="myImage" onChange={hanldeFile} />
     
           <button type="submit" className="btn btn-default">
-            Signup
+            Create Book
           </button>
         </form>
     

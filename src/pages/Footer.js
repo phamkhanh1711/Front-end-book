@@ -5,7 +5,7 @@ function Footer ()
       <div className="footer-bg">
   
      <footer id="footer">{/*Footer*/}
-          <img src={paper}/>
+          <img id='imgpaper' src={paper}/>
 
           <div className="footer-top">
             <div className="container">

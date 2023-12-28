@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import CheckError from "./CheckError";
 import axios from "axios";
 import { GoogleOAuthProvider , GoogleLogin } from '@react-oauth/google';
@@ -43,7 +43,14 @@ function Register()
         if (inputs.username === "") {
           errorsSubmit.username = "Vui Lòng Nhập username";
           flag = false;
-        }
+        }else if (/[^a-zA-Z]/.test(inputs.username)) {
+          errorsSubmit.username = "Vui lòng không nhập ký tự đặc biệt hoặc số";
+          flag = false;
+        } 
+        else if (!/^[a-zA-Z]+$/.test(inputs.username) || inputs.username.length < 2) {
+          errorsSubmit.username = "Vui lòng chỉ nhập ít nhất 2 ký tự chữ ";
+          flag = false;
+        } 
         if (inputs.email === "") {
           errorsSubmit.email = "Vui Lòng Nhập Email";
           flag = false;
@@ -52,10 +59,26 @@ function Register()
           flag = false;
         }
         if (inputs.password === "") {
-          errorsSubmit.password = "Vui Lòng Nhập PassWord";
+          errorsSubmit.password = "Vui lòng Nhập mật khẩu";
+          flag = false;
+        } else if (
+          !/^[A-Z]/.test(inputs.password) || // Kiểm tra chữ cái đầu tiên là in hoa
+          !/\d/.test(inputs.password) ||     // Kiểm tra có ít nhất một chữ số
+          !/[!@#$%^&*(),.?":{}|<>]/.test(inputs.password) || // Kiểm tra có ít nhất một ký tự đặc biệt
+          inputs.password.length < 6            // Kiểm tra có ít nhất 6 ký tự
+        ) {
+          errorsSubmit.password = "Mật khẩu phải đáp ứng các yêu cầu sau:\n" +
+                                   "- Bắt đầu bằng chữ cái in hoa\n" +
+                                   "- Chứa ít nhất một chữ số\n" +
+                                   "- Chứa ít nhất một ký tự đặc biệt\n" +
+                                   "- Có ít nhất 6 ký tự";
           flag = false;
         }
-        if (inputs.role_id === "" || inputs.role_id === undefined) {
+        
+        if (inputs.role_id === "1") {
+          errorsSubmit.role_id = "Không được chọn quyền Admin";
+          flag = false;
+        } else if (inputs.role_id === "" || inputs.role_id === undefined) {
           errorsSubmit.role_id = "Vui Lòng Nhập role_id";
           flag = false;
         }
@@ -99,7 +122,7 @@ function Register()
       const arr = [
         { id: 1, name: "Admin" },
         { id: 2, name: "Member" }
-      ];
+      ];  
       function renderSelect() {
         return arr.map((item) => (
           <option key={item.id} value={item.id}>
@@ -127,11 +150,13 @@ function Register()
                 <select name="role_id"  onChange={handleInput}>
                 {renderSelect()}
                  </select>
-       
+                 {errors.role_id && <span className='text-danger' >  {errors.role_id}</span>}
              
-                <button type="submit" class="btn btn-default">Signup</button>
+                 <button type="submit" class="btn btn-default">
+            Signup
+          </button>
             </form>
-            <GoogleOAuthProvider clientId="<8273508930-fn4jqgv9fbi628qqfm1k559took0kg49.apps.googleusercontent.com>">
+            {/* <GoogleOAuthProvider clientId="<8273508930-fn4jqgv9fbi628qqfm1k559took0kg49.apps.googleusercontent.com>">
 
             <GoogleLogin
                     onSuccess={credentialResponse => {
@@ -141,7 +166,7 @@ function Register()
                       console.log('Login Failed');
                     }}
                   />
-              </GoogleOAuthProvider>
+              </GoogleOAuthProvider> */}
             {/* <CheckError errors  = {errors} /> */}
         </div>
 	</div>

@@ -19,7 +19,7 @@ import Register from './members/Register';
 import Login from './members/Login';
 import Comment from './Blogs/Comment';
 import Rate from './Blogs/Rate';
-import Update from './members/Update';
+
 import Myproduct from './product/Myproduct';
 import Addproduct from './product/Addproduct';
 
@@ -54,6 +54,8 @@ import ListComment_Sp from './Items/Sách_Thể_Thao/ListComment_SP';
 import Wishlist from './Items/Wishlist';
 import Payment from './product/Payment';
 import Cart from './product/Cart';
+import Button_back from './Items/Button_back';
+import Create_profile from './members/Create_profile';
 
 
 
@@ -74,7 +76,7 @@ root.render(
                <Route index path='/login' element={<Login/>}/>
                <Route index path='/comment' element={<Comment/>}/>
                <Route index path='/rate' element={<Rate/>}/>
-               <Route index path='/account' element={<Update/>}/>
+               <Route index path='/account' element={<Create_profile/>}/>
                <Route index path='/myaccount' element={<Myproduct/>}/>
                <Route index path='/productaccount' element={<Addproduct/>}/>
                <Route index path='/detective' element={<Detective/>}/>
@@ -84,7 +86,7 @@ root.render(
                <Route index path='/pdf/:id' element={<PDFViewer/>}/>
                <Route index path='/kid' element={<Kid/>}/>
                <Route index path='/kid/detail/:id' element={<Kid_detail/>}/>
-               <Route index path='/payment' element={<Payment/>}/>
+               <Route path='/payment/:id' element={<Payment/>} />
                <Route index path='/checkout' element={<Checkout/>}/>
                <Route index path='/history' element={<History/>}/>
                <Route index path='/history/detail/:id' element={<History_detail/>}/>
@@ -100,7 +102,8 @@ root.render(
                <Route index path='/listcommentls' element={<ListComment_Ls/>}/>
                <Route index path='/listcommentsp' element={<ListComment_Sp/>}/>
                <Route index path='/wishlist' element={<Wishlist/>}/>
-               <Route index path='/cart/:id' element={<Cart/>}/>               
+               <Route index path='/cart/:id' element={<Cart/>}/>   
+               <Route index path='/button_back/:id' element={<Button_back/>}/>             
             </Routes>
         </App>
     </Router>

@@ -49,8 +49,8 @@ function Detective(props) {
               </div>
             </div>
             <Link className="btn btn-primary" to={`/detective/detail/${item.book_id}`}>
-              Read More
-            </Link>
+  Read More
+</Link>
           </div>
           <div className="choose">
             <ul className="nav nav-pills nav-justified">

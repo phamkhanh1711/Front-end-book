@@ -406,9 +406,9 @@ ul.sub-menu {
 *******Footer CSS******
 **************************/
 
-#footer {
+/* #footer {
     background: #F0F0E9;
-}
+} */
 
 .footer-bg {
     background-image: url('../image/Paper Text Picture Frame Brown Pattern - Medieval European Border Background Transparent PNG 1.png');
@@ -417,17 +417,18 @@ ul.sub-menu {
     background-position: center;
     color: white; /* Màu chữ trắng để tạo sự tương phản */
     text-align: center; /* Canh giữa nội dung trong footer */
-    padding: 20px 0; /* Điều chỉnh khoảng cách giữa nội dung và lề trên/dưới */
+  
   }
+  
 .footer-top .container {
-    background-image: url('../image/Paper Text Picture Frame Brown Pattern - Medieval European Border Background Transparent PNG 1.png');
+    
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  color: white; /* Màu chữ trắng để tạo sự tương phản */
-  text-align: center; /* Canh giữa nội dung trong background */
-  padding: 20px 0; /* Điều chỉnh khoảng cách giữa nội dung và lề trên/dưới */
-  position: relative; /* Cần thiết để đặt vị trí tương đối cho con */
+  color: white; 
+  text-align: center; 
+  padding: 20px 0; 
+  position: relative; 
 }
 .footer-top .col-sm-2 {
     position: absolute;
@@ -437,9 +438,11 @@ ul.sub-menu {
     padding: 20px;
    
 }
-
+#imgpaper{
+    margin-bottom: -70px;
+}
 .companyinfo {
-    margin-top: 57px;
+    margin-top: -80%;
 }
 
 .companyinfo h2 {
@@ -569,25 +572,38 @@ ul.sub-menu {
 }
 
 .single-widget h2 {
-    color: #666663; font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: bold; margin-bottom: 12px; text-transform: uppercase;  
+    color: #666663;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 7px;
+    text-transform: uppercase;
 }
 
 .footer-widget .col-sm-2 {
-    position: absolute; top: 50%; left: 8%; transform: translate(-35%, -135%); padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translate(-35%, -119%);
+    padding: 20px;
 }
 .footer-widget .col-sm-2_1 {
-    position: absolute; top: 50%; left: 30%; transform: translate(-35%,-135%); padding: 20px;
+    position: absolute; top: 50%; left: 30%; transform: translate(-35%,-120%); padding: 20px;
 }
 
 .footer-widget .col-sm-2_2 {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-4%, -135%);
+    transform: translate(-4%, -120%);
     padding: 20px
 }
 .footer-widget .col-sm-3 {
-    position: absolute; top: 50%; left: 80%; transform: translate(-35%, -158%); padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 72%;
+    transform: translate(-35%, -130%);
+    padding: 20px;
 }
 .single-widget h2 i {
     margin-right: 15px;
@@ -1386,9 +1402,8 @@ h2.title {
 }
 
 .product-information span {
+    margin-left: 40%;
     display: inline-block;
-    margin-bottom: 8px;
-    margin-top: 18px;
 }
 
 .product-information span span {
@@ -2694,15 +2709,13 @@ textarea {
 
   
   .signup-form button[type="submit"] {
-   margin-left: 0%;
+  
     margin-top: 20px;
-	width: 100%;
+	
 	height: 50px;
 	border: 1px solid;
-	background: #2691d9;
-	border-radius: 25px;
-	font-size: 18px;
-	color: #e9f4fb;
+	
+	
 	font-weight: 700;
 	cursor: pointer;
 	outline: none;
@@ -3170,6 +3183,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-left: 19%;
 }
 
 #home h1, #home p {
@@ -3180,11 +3194,20 @@ body {
     font-size: 30px;
     margin-bottom: 10px; /* Khoảng cách giữa h1 và p */
 }
-
+#home h1:before {
+    font-size: 30px;
+   
+    position: absolute;
+    bottom: -6px;
+    width: 110px;
+    height: 2px;
+    background: #52d3aa;
+    content: "";
+}
 #home p {
    
     color: black;
-    font-size: 10px;
+   margin-top: 10%;
     max-width: 400px; /* Đặt chiều rộng tối đa cho p */
     transition-delay: 0.2s;
     padding: 0 45px;
@@ -3200,6 +3223,7 @@ body {
 }
 
 .img2 {
+    margin-left: 20%;
     flex: 1;
     margin-right: 20px; /* Thay đổi margin-right để giữ khoảng cách giữa ảnh và phần còn lại */
 }
@@ -3219,14 +3243,21 @@ body {
     margin: 0; 
 }
 
-#home_2 h1 {
+#home_2 h1::before {
     font-size: 30px;
-    margin-bottom: 10px; /* Khoảng cách giữa h1 và p */
+   
+    position: absolute;
+    bottom: -6px;
+    width: 110px;
+    height: 2px;
+    background: #52d3aa;
+    content: "";
 }
 
 #home_2 p {
+   
     color: black;
-    font-size: 10px;
+   margin-top: 10%;
     max-width: 400px; /* Đặt chiều rộng tối đa cho p */
     transition-delay: 0.2s;
     padding: 0 45px;
@@ -3374,3 +3405,72 @@ body {
         margin-top: -16%;
     
   }
+  #fh5co-header {
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    height: 600px; /* Điều chỉnh chiều cao của banner theo nhu cầu */
+    color: #fff; /* Màu chữ cho vùng header */
+  }
+  
+  #fh5co-header .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền chữ overlay với độ trong suốt */
+  }
+  
+  #fh5co-header .container {
+    position: relative;
+    z-index: 2;
+  }
+  
+  #fh5co-header #fh5co-logo a {
+    text-decoration: none;
+    color: #fff; /* Màu chữ cho logo */
+    font-size: 30px; /* Kích thước chữ cho logo */
+  }
+  
+  #fh5co-header .intro h2 {
+    font-size: 24px; /* Kích thước chữ cho tiêu đề lớn */
+  }
+  
+  #fh5co-header .intro a {
+    color: #fff; /* Màu chữ cho các liên kết */
+  }
+  
+  #fh5co-header .btn-primary,
+  #fh5co-header .btn-ebook {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #3498db; /* Màu nền cho nút */
+    border-radius: 5px;
+  }
+  
+  #fh5co-header .btn-primary:hover,
+  #fh5co-header .btn-ebook:hover {
+    background-color: #2980b9; /* Màu nền khi hover */
+  }
+  
+  #fh5co-header .price {
+    font-weight: bold;
+    margin-left: 5px;
+  }
+  
+  #fh5co-header .fh5co-intro-img {
+    text-align: center;
+    margin-top: 20px; /* Khoảng cách giữa hình và nội dung bên cạnh */
+  }
+  
+  #fh5co-header .img-1,
+  #fh5co-header .img-2 {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px; /* Khoảng cách giữa hai hình */
+  }
+  
