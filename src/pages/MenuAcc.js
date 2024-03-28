@@ -17,6 +17,16 @@ function MenuAcc() {
                   <span className="pull-right">+</span>Profie Account
                 </Link>
               </li>
+              {userRole !== 1 && (
+              <li>
+              <Link to="/my_ds_payment">
+                <span className="pull-right">+</span>My Book
+              </Link>
+            </li>
+              )}
+
+
+
               {userRole !== 2 && (
                 <li>
                   <Link to="/myaccount">

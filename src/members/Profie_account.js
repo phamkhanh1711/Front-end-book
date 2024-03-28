@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function Profie_account() {
   const [userData, setUserData] = useState({});
+  let navigate = useNavigate();  // Corrected useNavigate usage
   const Token = Cookies.get('Token');
   const config = {
     headers: {
@@ -26,15 +29,11 @@ function Profie_account() {
   }, []);
 
   const handleDelete = () => {
-    // Assuming Token is a valid JWT string
     const Token = Cookies.get('Token');
-
-    // Make sure the Token is a valid string
-    if (!Token || typeof Token !== 'string') {
-      console.error('Invalid or missing token');
-      return;
-    }
-
+    // if (userData.role_id !== 1) {
+    //   alert("Bạn không có quyền xóa thông tin người dùng.");
+    //   return;
+    // }
     const config = {
       headers: {
         Authorization: `Bearer ${Token}`,
@@ -49,12 +48,18 @@ function Profie_account() {
       .delete(Durl, config)
       .then((res) => {
         console.log(res);
-        // Update the local state to reflect the deleted user information
-        setUserData({});
-        // Optionally, you might want to redirect the user to a different page or perform other actions after deletion.
+        Swal.fire({
+          title: "Good job!",
+          text: "login Successful !",
+          icon: "success"
+        });
+       
+       
+        navigate("/account");  // Corrected navigation
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
+        alert("Xoá không thành công. Vui lòng thử lại.");
       });
   };
 
@@ -72,9 +77,9 @@ function Profie_account() {
         <a target="_blank" href="#"><i className="fa fa-linkedin" /></a>
         <a target="_blank" href="#"><i className="fa fa-google-plus" /></a>
       </div>
-      <button>Contact me</button>
+     
       <div className="delete">
-        <button style={{ color: "red" }} onClick={handleDelete}>Delete Account</button>
+        <button style={{ color: "red", fontSize:"15px" }} onClick={handleDelete}>Delete Information</button>
       </div>
     </div>
   );

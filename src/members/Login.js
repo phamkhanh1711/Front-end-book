@@ -3,6 +3,8 @@ import CheckError from "./CheckError";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
+import Swal from "sweetalert2";
+
 function Login() {
   const [inputs, setInputs] = useState({
     email: "",
@@ -34,14 +36,15 @@ function Login() {
       errorsSubmit.password = "Vui long nhap password";
       flag = false;
     }
-    // if (inputs.role_id === "" || inputs.role_id === undefined) {
-    //   errorsSubmit.role_id = "Vui Lòng Nhập role_id";
-    //   flag = false;
-    // }
+ 
 
     if (!flag) {
       setErrors(errorsSubmit);
-      alert("Login that bai");
+      Swal.fire({
+        title: "Error!",
+        text: "Login failed. Please check your credentials.",
+        icon: "error"
+      });
     } else {
       setErrors({});
       const data = {
@@ -54,7 +57,7 @@ function Login() {
         .then((res) => {
           console.log(res);
 
-           localStorage.setItem('isLoggedIn', JSON.stringify({ loggedIn: true }));
+         
 
           
      
@@ -68,13 +71,22 @@ function Login() {
 
           // Cookies.setItem('Auth', JSON.stringify(Auth));
           
-          alert("Login thanh cong");
+          Swal.fire({
+            title: "Good job!",
+            text: "login Successful !",
+            icon: "success"
+          });
           navigate("/")
           // Sau khi đăng nhập thành công, điều hướng đến trang tương ứng
           
         })
         .catch((error) => { 
           console.log(error);
+          Swal.fire({
+            title: "Error!",
+            text: "Login failed. Please check your credentials.",
+            icon: "error"
+          });
         });
     }
   }
@@ -106,18 +118,11 @@ function Login() {
       <div class="login-form">
         <h2>Login to your account</h2>
         <form action="#" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email Address"
-            name="email"
-            onChange={handleInput}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={handleInput}
-          />
+          <input type="email"placeholder="Email Address" name="email"onChange={handleInput}/>
+          {errors.email && <span className='text-danger' >  {errors.email}</span>}
+          <input type="password"placeholder="Password"name="password"onChange={handleInput}/>
+          {errors.password && <span className='text-danger' >  {errors.password}</span>}
+
           {/* <select name="role_id" onChange={handleInput}>
             {renderSelect()}
           </select> */}

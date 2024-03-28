@@ -2,8 +2,12 @@ import axios from "axios";
 import CheckError from "../members/CheckError";
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 function Addproduct()
 {   
+  let navigate = useNavigate()
   const [getData, setData] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [errors, setErrors] = useState([]);
@@ -36,13 +40,14 @@ function Addproduct()
         <select name="category" onChange={handleInput} value={user.category}>
           <option value="" disabled hidden>
             Please choose Category ....
-          </option  >
+          </option>
           {getData.map((category) => (
             <option key={category.category_id} value={category.category_id}>
               {category.category_name}
             </option>
           ))}
         </select>
+       
         <input
           type="text"
           placeholder="New Category..."
@@ -50,9 +55,11 @@ function Addproduct()
           onChange={handleInput}
           value={user.newCategory}
         />
+        
       </div>
     );
   }
+  
   
   useEffect(() => {
   axios.get("http://localhost:8081/all_supplier")
@@ -106,10 +113,7 @@ function Addproduct()
     if (user.bookTitle === "") {
       errorsSubmit.bookTitle = "Vui lòng nhập tiêu đề sách";
       flag = false;
-  } else if (!/^[a-zA-Z0-9]+$/.test(user.bookTitle)) {
-      errorsSubmit.bookTitle = "Chỉ được nhập chữ và số";
-      flag = false;
-  }
+    } 
   
   if (user.price === "") {
     errorsSubmit.price = "Vui lòng nhập giá sách";
@@ -125,22 +129,29 @@ function Addproduct()
     flag = false;
 }
 
+if (user.author === "") {
+  errorsSubmit.username = "Vui lòng Nhập author ";
+  flag = false;
+} else if (!/[a-zA-Z]/.test(user.author)) {
+  errorsSubmit.author = "Vui lòng nhập ít nhất một ký tự chữ";
+  flag = false;
+} else if (!/^\S+(?: \S+)*$/.test(user.author)) {
+  errorsSubmit.author = "Vui lòng chỉ nhập một khoảng trắng giữa các ký tự";
+  flag = false;
+}
+
     if (!user.supplier) {
       errorsSubmit.supplier = "Vui lòng chọn nhà cung cấp";
       flag = false;
     }
-    if (user.author === "") {
-      errorsSubmit.author = "Vui lòng chọn tác giả";
-      flag = false;
-  } else if (!/^[a-zA-Z]+$/.test(user.author)) {
-      errorsSubmit.author = "Vui lòng chỉ nhập chữ cái không có số và ký tự đặc biệt";
-      flag = false;
-  }
   
-  if (user.publicationYear === "") {
-    errorsSubmit.publicationYear = "Vui lòng chọn năm xuất bản";
-    flag = false;
-} 
+    const currentDate = new Date();
+const userPublicationDate = new Date(user.publicationYear);
+
+if (!user.publicationYear || userPublicationDate > currentDate) {
+  errorsSubmit.publicationYear = "Vui lòng chọn năm xuất bản hợp lệ";
+  flag = false;
+}
 
   
     if (fileElem === null) {
@@ -205,7 +216,23 @@ function Addproduct()
         .then((response) => {
           console.log(response);
           setErrors({});
-          alert("Create product! Thành công");
+          // alert("Create product! Thành công");
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Create product! Thành công"
+          });
+          navigate("/myaccount")
         })
         .catch((error) => {
           console.log(error);
@@ -220,35 +247,21 @@ function Addproduct()
       <div className="signup-form">
         <h2>CREATE BOOK</h2>
         <form action="#" onSubmit={handleSubmit} encType="multipart/form-data">
-          <input
-            type="text"
-            placeholder="Book Title"
-            name="bookTitle"
-            onChange={handleInput}
-            value={user.bookTitle}
-          />
-          <input
-            type="text"
-            placeholder="Price"
-            name="price"
-            onChange={handleInput}
-            value={user.price}
-          />
-          <input
-            type="text"
-            placeholder="Author"
-            name="author"
-            onChange={handleInput}
-            value={user.author}
-          />
-          <input
-            type="date"
-            name="publicationYear"
-            onChange={handleInput}
-            value={user.publicationYear}
-          />
-    
+          <input type="text"placeholder="Book Title"name="bookTitle"onChange={handleInput}value={user.bookTitle}/>
+          {errors.bookTitle && <span className='text-danger' >  {errors.bookTitle}</span>}
+
+          <input type="text"  placeholder="Price" name="price" onChange={handleInput} value={user.price}/>
+          {errors.price && <span className='text-danger' >  {errors.price}</span>}
+
+          <input type="text" placeholder="Author" name="author" onChange={handleInput} value={user.author}/>
+          {errors.author && <span className='text-danger' >  {errors.author}</span>}
+
+          <input type="date" name="publicationYear" onChange={handleInput} value={user.publicationYear} />
+          {errors.publicationYear && <span className='text-danger' >  {errors.publicationYear}</span>}
+
           {renderCategoryOptions()}
+          
+
       {renderSupplierOptions()}
         
     
@@ -263,7 +276,7 @@ function Addproduct()
           </button>
         </form>
     
-        <CheckError errors={errors} />
+        {/* <CheckError errors={errors} /> */}
       </div>
     </div>
   );

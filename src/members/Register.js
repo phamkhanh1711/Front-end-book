@@ -4,6 +4,7 @@ import axios from "axios";
 import { GoogleOAuthProvider , GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Register()
 {
@@ -39,18 +40,21 @@ function Register()
         e.preventDefault();
         let errorsSubmit = {};
         let flag = true;
-      
         if (inputs.username === "") {
-          errorsSubmit.username = "Vui Lòng Nhập username";
+          errorsSubmit.username = "Vui lòng Nhập username";
           flag = false;
-        }else if (/[^a-zA-Z]/.test(inputs.username)) {
-          errorsSubmit.username = "Vui lòng không nhập ký tự đặc biệt hoặc số";
+        } else if (!/^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$/.test(inputs.username)) {
+          errorsSubmit.username = "Vui lòng chỉ nhập chữ và khoảng trắng";
           flag = false;
-        } 
-        else if (!/^[a-zA-Z]+$/.test(inputs.username) || inputs.username.length < 2) {
-          errorsSubmit.username = "Vui lòng chỉ nhập ít nhất 2 ký tự chữ ";
+        } else if (!/[a-zA-ZÀ-ÖØ-öø-ÿ]/.test(inputs.username)) {
+          errorsSubmit.username = "Vui lòng nhập ít nhất một ký tự chữ";
           flag = false;
-        } 
+        } else if (!/^\S+(?: \S+)*$/.test(inputs.username)) {
+          errorsSubmit.username = "Vui lòng chỉ nhập một khoảng trắng giữa các ký tự";
+          flag = false;
+        }
+
+        
         if (inputs.email === "") {
           errorsSubmit.email = "Vui Lòng Nhập Email";
           flag = false;
@@ -85,7 +89,11 @@ function Register()
       
         if (!flag) {
           setErrors(errorsSubmit);
-          alert("Login Thất bại");
+          Swal.fire({
+            title: "Error!",
+            text: "Sigup failed. Please check your credentials.",
+            icon: "error"
+          });
         } else {
           setErrors({});
           const data = {
@@ -109,19 +117,24 @@ function Register()
               if (res.data.error) {
                 setErrors(res.data.error);
               } else {
-                alert("Thanh Cong");
+                Swal.fire({
+                  title: "Good job!",
+                  text: "Sigup Success!",
+                  icon: "success"
+                });
                 navigate("/login");
               }
             })
             .catch(error => {
               console.log(error);
+              
             });
         }
       }
      
       const arr = [
-        { id: 1, name: "Admin" },
-        { id: 2, name: "Member" }
+        {id: 2, name: "Member" },
+        {  id: 1 }
       ];  
       function renderSelect() {
         return arr.map((item) => (

@@ -14,7 +14,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import reportWebVitals from './reportWebVitals';
 import Home from './pages/Home';
 import Blog from './Blogs/Blog';
-import Blog_Detail from './Blogs/Blog_detail';
+// import Blog_Detail from './Blogs/Blog_detail';
 import Register from './members/Register';
 import Login from './members/Login';
 import Comment from './Blogs/Comment';
@@ -37,7 +37,7 @@ import Checkout from './product/Checkout';
 
 import Search from './pages/Search';
 import Profie_account from './members/Profie_account';
-import AdminDashboard from './Admin/AdminDashboard';
+
 import Comments from './Items/Sách_Trinh_Thám/Comments';
 import Detective from './Items/Sách_Trinh_Thám/Detective';
 import Detective_detail from './Items/Sách_Trinh_Thám/Detective_detail';
@@ -57,6 +57,9 @@ import Cart from './product/Cart';
 import Button_back from './Items/Button_back';
 import Create_profile from './members/Create_profile';
 
+import My_ds_payment from './members/My_ds_payment';
+import ListComment_kid from './Items/Sách_Cho_Bé/ListComment_kid';
+
 
 
 
@@ -71,7 +74,7 @@ root.render(
             <Routes>
                <Route index path='/' element={<Home/>}/>
                <Route index path='/blog' element={<Blog/>}/>
-               <Route index path='/blog/detail/:id' element={<Blog_Detail/>}/>
+               {/* <Route index path='/blog/detail/:id' element={<Blog_Detail/>}/> */}
                <Route index path='/register' element={<Register/>}/>
                <Route index path='/login' element={<Login/>}/>
                <Route index path='/comment' element={<Comment/>}/>
@@ -92,18 +95,20 @@ root.render(
                <Route index path='/history/detail/:id' element={<History_detail/>}/>
                <Route index path='/search' element={<Search/>}/>
                <Route index path='/profie' element={<Profie_account/>}/>
-               <Route index path='/dashboard' element={<AdminDashboard/>}/>
+             
               
                <Route index path='/comments/:id' element={<Comments/>}/>
                <Route index path='/comments_sp/:id' element={<Comment_Sport/>}/>
                <Route index path='/comments_kid/:id' element={<Comments_Kid/>}/>
                <Route index path='/comments_ls/:id' element={<Comments_Ls/>}/>
                <Route index path='/listcommenttt' element={<ListComment_TT/>}/>
+               <Route index path='/listcommentkid' element={<ListComment_kid/>}/>
                <Route index path='/listcommentls' element={<ListComment_Ls/>}/>
                <Route index path='/listcommentsp' element={<ListComment_Sp/>}/>
                <Route index path='/wishlist' element={<Wishlist/>}/>
                <Route index path='/cart/:id' element={<Cart/>}/>   
-               <Route index path='/button_back/:id' element={<Button_back/>}/>             
+               <Route index path='/button_back/:id' element={<Button_back/>}/>  
+               <Route index path='/my_ds_payment' element={<My_ds_payment/>}/>           
             </Routes>
         </App>
     </Router>

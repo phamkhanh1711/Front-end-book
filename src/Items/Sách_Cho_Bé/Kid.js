@@ -38,21 +38,12 @@ function Kid(props) {
               <img src={`http://localhost:8081/public/upload/${item.image_path}`} alt={item.book_title} />
               <h2>{item.price}.VND</h2>
               <p>{item.book_title}</p>
-              <a href="#" className="btn btn-default add-to-cart">
+              {/* <a href="#" className="btn btn-default add-to-cart">
                 <i className="fa fa-shopping-cart" />
                 Add to cart
-              </a>
+              </a> */}
             </div>
-            <div className="product-overlay">
-              <div className="overlay-content">
-                <h2>{item.price}.VND</h2>
-                <p>{item.book_title}</p>
-                <a href="#" className="btn btn-default add-to-cart">
-                  <i className="fa fa-shopping-cart" />
-                  Add to cart
-                </a>
-              </div>
-            </div>
+          
             <Link className="btn btn-primary" to={`/kid/detail/${item.book_id}`}>
               Read More
             </Link>

@@ -39,16 +39,7 @@ function Sport(props) {
                 Add to cart
               </a>
             </div>
-            <div className="product-overlay">
-              <div className="overlay-content">
-                <h2>{item.price}.VND</h2>
-                <p>{item.book_title}</p>
-                <a href="#" className="btn btn-default add-to-cart">
-                  <i className="fa fa-shopping-cart" />
-                  Add to cart
-                </a>
-              </div>
-            </div>
+           
             <Link className="btn btn-primary" to={`/sport/detail/${item.book_id}`}>
               Read More
             </Link>

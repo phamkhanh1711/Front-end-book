@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function ListComment_SP(props) {
+function ListComment_kid(props) {
   const { book_id } = props;
   const [comments, setComments] = useState([]);
 
@@ -53,4 +53,4 @@ function ListComment_SP(props) {
   );
 }
 
-export default ListComment_SP;
+export default ListComment_kid;

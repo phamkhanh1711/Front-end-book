@@ -32,6 +32,9 @@ function Search() {
     // Handle the click on a search result (e.g., navigate to product details page)
     console.log(`Clicked on result with ID ${productId}`);
     navigate(`/detective/detail/${productId}`);
+
+    // Hide the search results
+    setShowResults(false);
   };
 
   return (

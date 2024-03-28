@@ -3,6 +3,8 @@ import CheckError from "../../members/CheckError";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
+import Swal from "sweetalert2";
+
 function Comment_Sport(props)
 {
   const navigate = useNavigate()
@@ -85,8 +87,8 @@ function handleInput(e)
     }
     function renderLogin()
     {
-        var isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
-        if(isLoggedIn)
+      const Token = Cookies.get('Token');
+        if(Token)
         {
             return(
             <button type="submit" class="btn btn-primary" >Post comment</button>
@@ -99,14 +101,19 @@ function handleInput(e)
     }
     function logout()
     {
-        alert("Vui lòng đăng nhập để viết bình luận");
-        localStorage.removeItem("isLoggedIn");
-    navigate("/login");
+      Swal.fire({
+        icon: "error",
+        title: "Error...",
+        text: "Login to Comment!",
+        footer: '<a href="#">Why do I have this issue?</a>'       
+        
+      });
+      navigate("/login");
     }
 
     return(
         <div className="category-tab shop-details-tab">
-          
+             
         <div className="col-sm-12">
           <ul className="nav nav-tabs">
             
@@ -118,12 +125,7 @@ function handleInput(e)
          
           <div className="tab-pane fade active in" id="reviews">
             <div className="col-sm-12">
-              <ul>
-                <li><a href><i className="fa fa-user" />EUGEN</a></li>
-                <li><a href><i className="fa fa-clock-o" />12:41 PM</a></li>
-                <li><a href><i className="fa fa-calendar-o" />31 DEC 2014</a></li>
-              </ul>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+              
               <p><b>Write Your Review</b></p>
               <form onSubmit={handleSubmit}>
                

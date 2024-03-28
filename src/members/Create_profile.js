@@ -3,6 +3,8 @@ import CheckError from "./CheckError";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 function Create_profile() {
   let navigate = useNavigate()
   const [errors, setErrors] = useState({});
@@ -90,7 +92,11 @@ function Create_profile() {
 
     if (!flag) {
       setErrors(errorsSubmit);
-      alert("Cập nhật thông tin thất bại");
+      Swal.fire({
+        title: "Error!",
+        text: "Create failed. Please check your credentials.",
+        icon: "error"
+      });
     } else {
       setErrors({});
       const Token = Cookies.get('Token');
@@ -122,8 +128,13 @@ console.log(config);
      axios.post(url, formData, config)
             .then(response => {
               console.log(response); 
-              alert("create  thông tin thanh cong");  
-              navigate('/profie')
+              
+          Swal.fire({
+            title: "Good job!",
+            text: "Create Profile Successful !",
+            icon: "success"
+          });
+               navigate('/profie')
             })
             .catch(error => {
               console.log(error);      
