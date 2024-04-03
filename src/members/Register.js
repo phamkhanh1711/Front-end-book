@@ -5,24 +5,30 @@ import { GoogleOAuthProvider , GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
+import { useDispatch} from "react-redux";
+import { useSelector } from "react-redux";
+import { fetchRegister } from "../actions/action";
 function Register()
 {
   const navigate = useNavigate()
-    const [inputs, setInputs ] = useState({
-      username:"",
-        email:"",
-        password:"",
-        role_id:"",
-    });
+   
+  const dispatch = useDispatch();
+
+  const register = useSelector((state) => state.register.register);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [role_id, setRole_id] = useState("");
     const [errors, setErrors] = useState({});
     const [getFile, setFile] = useState([]);
     const [avatar, setAvatar] = useState("");
-    function handleInput (e){
-         const nameInput = e.target.name;
-         const value  = e.target.value
-         setInputs((state) =>({...state, [nameInput]  : value}));
-    }
+    const handleInput = (e) => {
+      const { name, value } = e.target;
+      if (name === "email") setEmail(value);
+      else if (name === "password") setPassword(value);
+      else if (name === "username") setUsername(value);
+      else if (name === "role_id") setRole_id(value);
+    };
     function hanldeFile(e) {
         const file = e.target.files;
         const reader = new FileReader();
@@ -40,36 +46,29 @@ function Register()
         e.preventDefault();
         let errorsSubmit = {};
         let flag = true;
-        if (inputs.username === "") {
+        if (username === "") {
           errorsSubmit.username = "Vui lòng Nhập username";
           flag = false;
-        } else if (!/^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$/.test(inputs.username)) {
-          errorsSubmit.username = "Vui lòng chỉ nhập chữ và khoảng trắng";
-          flag = false;
-        } else if (!/[a-zA-ZÀ-ÖØ-öø-ÿ]/.test(inputs.username)) {
-          errorsSubmit.username = "Vui lòng nhập ít nhất một ký tự chữ";
-          flag = false;
-        } else if (!/^\S+(?: \S+)*$/.test(inputs.username)) {
-          errorsSubmit.username = "Vui lòng chỉ nhập một khoảng trắng giữa các ký tự";
-          flag = false;
-        }
+        } 
+        
+
 
         
-        if (inputs.email === "") {
+        if (email === "") {
           errorsSubmit.email = "Vui Lòng Nhập Email";
           flag = false;
-        } else if (!IsEmail(inputs.email)) {
+        } else if (!IsEmail(email)) {
           errorsSubmit.email = "Chưa đúng định dạng Email";
           flag = false;
         }
-        if (inputs.password === "") {
+        if (password === "") {
           errorsSubmit.password = "Vui lòng Nhập mật khẩu";
           flag = false;
         } else if (
-          !/^[A-Z]/.test(inputs.password) || // Kiểm tra chữ cái đầu tiên là in hoa
-          !/\d/.test(inputs.password) ||     // Kiểm tra có ít nhất một chữ số
-          !/[!@#$%^&*(),.?":{}|<>]/.test(inputs.password) || // Kiểm tra có ít nhất một ký tự đặc biệt
-          inputs.password.length < 6            // Kiểm tra có ít nhất 6 ký tự
+          !/^[A-Z]/.test(password) || // Kiểm tra chữ cái đầu tiên là in hoa
+          !/\d/.test(password) ||     // Kiểm tra có ít nhất một chữ số
+          !/[!@#$%^&*(),.?":{}|<>]/.test(password) || // Kiểm tra có ít nhất một ký tự đặc biệt
+          password.length < 6            // Kiểm tra có ít nhất 6 ký tự
         ) {
           errorsSubmit.password = "Mật khẩu phải đáp ứng các yêu cầu sau:\n" +
                                    "- Bắt đầu bằng chữ cái in hoa\n" +
@@ -79,10 +78,10 @@ function Register()
           flag = false;
         }
         
-        if (inputs.role_id === "1") {
+        if (role_id === "1") {
           errorsSubmit.role_id = "Không được chọn quyền Admin";
           flag = false;
-        } else if (inputs.role_id === "" || inputs.role_id === undefined) {
+        } else if (role_id === "" || role_id === undefined) {
           errorsSubmit.role_id = "Vui Lòng Nhập role_id";
           flag = false;
         }
@@ -95,45 +94,21 @@ function Register()
             icon: "error"
           });
         } else {
-          setErrors({});
-          const data = {
-            username: inputs.username,
-            email: inputs.email,
-            password: inputs.password,
-            role_id: inputs.role_id,
-          };
+          dispatch(fetchRegister(username, email, password, role_id));
       
+          Swal.fire({
+            title: "Success!",
+            text: "Sigup success.",
+            icon: "success"
+          });
+          navigate("/login");
           
-          // Send a POST request to your API's registration endpoint
-          axios.post("http://localhost:8081/register", data)
           
-            .then((res) => {
-              console.log(res);
-            
-
-             
-              // localStorage.setItem('Token', JSON.stringify(Token));
-            
-              if (res.data.error) {
-                setErrors(res.data.error);
-              } else {
-                Swal.fire({
-                  title: "Good job!",
-                  text: "Sigup Success!",
-                  icon: "success"
-                });
-                navigate("/login");
-              }
-            })
-            .catch(error => {
-              console.log(error);
-              
-            });
         }
       }
      
       const arr = [
-        {id: 2, name: "Member" },
+        {id: 3, name: "Member" },
         {  id: 1 }
       ];  
       function renderSelect() {
@@ -169,20 +144,22 @@ function Register()
             Signup
           </button>
             </form>
-            {/* <GoogleOAuthProvider clientId="<8273508930-fn4jqgv9fbi628qqfm1k559took0kg49.apps.googleusercontent.com>">
-
-            <GoogleLogin
-                    onSuccess={credentialResponse => {
-                      console.log(credentialResponse);
-                    }}
-                    onError={() => {
-                      console.log('Login Failed');
-                    }}
-                  />
-              </GoogleOAuthProvider> */}
-            {/* <CheckError errors  = {errors} /> */}
+          
         </div>
 	</div>
     )
 }
 export default Register;
+
+
+
+
+
+
+
+
+
+
+
+
+

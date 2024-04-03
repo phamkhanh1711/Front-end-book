@@ -4,35 +4,41 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLogin } from "../actions/action";
 
 function Login() {
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-    // role_id: "",
-  });
+    const dispatch = useDispatch()
+
+  const login = useSelector((state) => state.login.login);
+
   const navigate = useNavigate();
   const [errors, setErrors] = useState([]);
 
-  function handleInput(e) {
-    const nameInput = e.target.name;
-    const value = e.target.value;
-    setInputs((state) => ({ ...state, [nameInput]: value }));
-  }
+ 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    if (name === "email") setEmail(value);
+    else if (name === "password") setPassword(value);
+   
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
     let errorsSubmit = {};
     let flag = true;
 
-    if (inputs.email === "") {
+    if (email === "") {
       errorsSubmit.email = "Vui long nhap lai Email";
       flag = false;
-    } else if (!IsEmail(inputs.email)) {
+    } else if (!IsEmail(email)) {
       errorsSubmit.email = "Chua dung dinh dang Email";
       flag = false;
     }
-    if (inputs.password === "") {
+    if (password === "") {
       errorsSubmit.password = "Vui long nhap password";
       flag = false;
     }
@@ -46,48 +52,26 @@ function Login() {
         icon: "error"
       });
     } else {
-      setErrors({});
-      const data = {
-        email: inputs.email,
-        password: inputs.password,
-        // role_id: inputs.role_id,
-      };
-      axios
-        .post("http://localhost:8081/login", data)
-        .then((res) => {
-          console.log(res);
-
-         
-
-          
+      dispatch(fetchLogin(email, password))
+      .then((data) => {
+        localStorage.setItem(
+          "isLoggedIn",
+          JSON.stringify({ loggedIn: true })
+        );
+  
+       const Token = data.jsontoken;
+       console.log(Token);
+       Cookies.set('Token', Token);
+       const Auth = data.User;
+       console.log(Auth);
+       Cookies.set('Auth', JSON.stringify(Auth));
+       navigate("/");
+      })
+      .catch((error) => {
+        // Xử lý khi có lỗi trong quá trình đăng nhập
+        console.error("Lỗi khi đăng nhập:", error);
+      });
      
-          const Token = res.data.jsontoken;
-          console.log(Token);
-          Cookies.set('Token', Token);
-          const Auth = res.data.User;
-          console.log(Auth);
-          Cookies.set('Auth', JSON.stringify(Auth));
-          
-
-          // Cookies.setItem('Auth', JSON.stringify(Auth));
-          
-          Swal.fire({
-            title: "Good job!",
-            text: "login Successful !",
-            icon: "success"
-          });
-          navigate("/")
-          // Sau khi đăng nhập thành công, điều hướng đến trang tương ứng
-          
-        })
-        .catch((error) => { 
-          console.log(error);
-          Swal.fire({
-            title: "Error!",
-            text: "Login failed. Please check your credentials.",
-            icon: "error"
-          });
-        });
     }
   }
 
